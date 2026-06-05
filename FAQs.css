@@ -1,0 +1,386 @@
+/* FAQs.css - NoxWebs FAQ Page Styles */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg: #050507;
+    --bg-2: #0c0c14;
+    --card: #13131f;
+    --card-hover: #1c1c2b;
+    --text: #f0f0f5;
+    --muted: #9b9bb3;
+    --accent: #8b5cf6;
+    --accent-2: #a78bfa;
+    --green: #00ff88;
+    --border: #252538;
+    --shadow: 0 10px 40px rgba(0,0,0,0.4);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    inset: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(600px circle at 15% 20%, rgba(139,92,246,0.18), transparent 40%),
+                radial-gradient(500px circle at 85% 80%, rgba(0,255,136,0.12), transparent 40%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Header */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 6%;
+    background: rgba(5,5,7,0.75);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+}
+
+.nox {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: var(--text);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nox::before {
+    content: 'N';
+    width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(135deg, var(--accent), #5b21b6);
+    border-radius: 8px;
+}
+
+.navbar {
+    display: flex;
+    gap: 28px;
+}
+
+.navbar a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.93rem;
+    font-weight: 500;
+    transition: color.2s;
+}
+
+.navbar a:hover { color: var(--text); }
+
+.header > a:last-child {
+    background: var(--accent);
+    color: white;
+    padding: 10px 18px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 20px rgba(139,92,246,0.25);
+    transition: transform.2s;
+}
+
+.header > a:last-child:hover { transform: translateY(-2px); }
+
+/* Hero */
+#about {
+    padding: 160px 6% 80px;
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.circle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 14px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-bottom: 24px;
+}
+
+.green.box {
+    width: 8px;
+    height: 8px;
+    background: var(--green);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--green);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.6} }
+
+h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 700;
+    letter-spacing: -1.5px;
+    line-height: 1.1;
+    margin-bottom: 18px;
+}
+
+.stand {
+    background: linear-gradient(135deg, var(--accent-2), #22d3ee);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.about {
+    color: var(--muted);
+    font-size: 1.05rem;
+    max-width: 680px;
+    margin: 0 auto;
+}
+
+/* FAQ Section */
+#faq {
+    padding: 20px 6% 100px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.services {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 40px;
+    color: var(--text);
+}
+
+.faq-container {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* FAQ Cards - using your service-card class */
+.service-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: all 0.25s ease;
+}
+
+.service-card:hover {
+    border-color: #3a3a55;
+    background: var(--card-hover);
+}
+
+#faq details {
+    width: 100%;
+}
+
+#faq summary {
+    list-style: none;
+    padding: 22px 26px;
+    padding-right: 56px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.02rem;
+    color: var(--text);
+    position: relative;
+    user-select: none;
+    transition: background 0.2s;
+}
+
+#faq summary::-webkit-details-marker { display: none; }
+
+#faq summary::after {
+    content: '\2b';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 28px;
+    height: 28px;
+    display: grid;
+    place-items: center;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--muted);
+    font-size: 0.8rem;
+    transition: all 0.3s;
+}
+
+#faq details[open] summary::after {
+    content: '\f068';
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+    transform: translateY(-50%) rotate(180deg);
+}
+
+#faq summary:hover {
+    background: rgba(255,255,255,0.02);
+}
+
+#faq details[open] {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px rgba(139,92,246,0.2), var(--shadow);
+}
+
+#faq details > div {
+    padding: 0 26px 24px 26px;
+    color: var(--muted);
+    font-size: 0.96rem;
+    line-height: 1.7;
+    animation: slideDown 0.3s ease;
+}
+
+#faq details > div p {
+    margin: 8px 0;
+}
+
+#faq details > div strong {
+    color: var(--text);
+    font-weight: 600;
+}
+
+#faq details > div a {
+    color: var(--accent-2);
+    text-decoration: none;
+}
+
+#faq details > div a:hover {
+    text-decoration: underline;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Contact */
+#contact {
+    background: var(--bg-2);
+    padding: 70px 6%;
+    text-align: center;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+#contact p:first-child {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+}
+
+#contact p {
+    color: var(--muted);
+    margin: 10px 0;
+}
+
+#contact i {
+    color: var(--accent);
+    margin-right: 8px;
+}
+
+#contact > i {
+    font-size: 1.3rem;
+    margin: 20px 10px 0;
+    color: var(--muted);
+    cursor: pointer;
+    transition: color.2s;
+}
+
+#contact > i:hover { color: var(--accent); }
+
+/* Footer */
+.sub-footer {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    padding: 60px 6%;
+    background: var(--bg);
+}
+
+.sub-footer p:first-child {
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 14px;
+}
+
+.sub-footer a,.sub-footer p:not(:first-child) {
+    display: block;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin: 8px 0;
+    transition: color.2s;
+}
+
+.sub-footer a:hover { color: var(--accent-2); }
+
+.sub4 i {
+    margin-right: 14px;
+    font-size: 1.1rem;
+    color: var(--muted);
+    transition: color.2s;
+    cursor: pointer;
+}
+
+.sub4 i:hover { color: var(--accent); }
+
+.footer {
+    text-align: center;
+    padding: 22px;
+    font-size: 0.85rem;
+    color: var(--muted);
+    background: var(--bg-2);
+    border-top: 1px solid var(--border);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+   .sub-footer { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+   .navbar { display: none; }
+   .header { padding: 16px 5%; }
+    #about { padding-top: 130px; }
+    h3 { font-size: 2.4rem; }
+}
+
+@media (max-width: 520px) {
+   .sub-footer { grid-template-columns: 1fr; }
+    #faq summary { padding: 18px 20px; padding-right: 50px; font-size: 0.98rem; }
+    #faq summary::after { right: 18px; }
+    #faq details > div { padding: 0 20px 20px; }
+}
