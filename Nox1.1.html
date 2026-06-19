@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/4269329e0e.js" crossorigin="anonymous"></script>
+    <title>What's New - NoxWebs 1.1</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap');
+
+        :root {
+            --bg: #07090f;
+            --bg-2: #0f111a;
+            --card: #141725;
+            --text: #e6e8ef;
+            --muted: #9aa3b2;
+            --accent: #00ff88;
+            --accent-2: #7c3aed;
+            --border: rgba(255,255,255,0.08);
+            --shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        a { color: inherit; text-decoration: none; }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px rgba(0,255,136,0.3); }
+            50% { box-shadow: 0 0 20px rgba(0,255,136,0.6); }
+            100% { box-shadow: 0 0 5px rgba(0,255,136,0.3); }
+        }
+
+        .fade-in-up { animation: fadeInUp 0.6s ease-out forwards; opacity: 0; }
+
+        /* Header */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 5%;
+            background: rgba(7,9,15,0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            animation: slideInDown 0.5s ease-out;
+        }
+
+        .nox {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nox-icon {
+            width: 32px;
+            height: 32px;
+            display: grid;
+            place-items: center;
+            background: #0d0d1a;
+            border: 1px solid rgba(15, 115, 197, 0.4);
+            border-radius: 9px;
+            color: #1763c7;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .nox:hover .nox-icon {
+            border-color: rgba(15, 115, 197, 0.8);
+            box-shadow: 0 0 15px rgba(15, 115, 197, 0.4);
+        }
+
+        .header > a {
+            background: var(--text);
+            color: #000;
+            padding: 9px 18px;
+            border-radius: 9px;
+            font-weight: 600;
+            font-size: 0.88rem;
+            transition: all 0.3s ease;
+        }
+
+        .header > a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 80px 5% 60px;
+            background:
+                radial-gradient(700px 350px at 50% -5%, rgba(124,58,237,0.2), transparent),
+                radial-gradient(500px 250px at 85% 15%, rgba(0,255,136,0.1), transparent);
+            overflow: hidden;
+        }
+
+        .bg-accent {
+            position: absolute;
+            font-size: 28rem;
+            font-family: 'Space Grotesk', sans-serif;
+            color: white;
+            opacity: 0.015;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            background: rgba(255,255,255,0.03);
+            color: var(--muted);
+            font-size: 0.82rem;
+            margin-bottom: 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .dot {
+            width: 7px;
+            height: 7px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.35; }
+        }
+
+        .hero h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.2rem, 5.5vw, 4rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 18px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .highlight {
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            max-width: 680px;
+            color: var(--muted);
+            font-size: 1rem;
+            line-height: 1.75;
+            margin-bottom: 28px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-button {
+            padding: 11px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            background: var(--text);
+            color: #000;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        /* Updates Grid */
+        .updates-container {
+            padding: 90px 5%;
+            background: var(--bg-2);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .updates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 18px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .update-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--border);
+            padding: 26px;
+            border-radius: 18px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .update-card:nth-child(1) { animation-delay: 0.1s; }
+        .update-card:nth-child(2) { animation-delay: 0.2s; }
+        .update-card:nth-child(3) { animation-delay: 0.3s; }
+        .update-card:nth-child(4) { animation-delay: 0.4s; }
+        .update-card:nth-child(5) { animation-delay: 0.5s; }
+        .update-card:nth-child(6) { animation-delay: 0.6s; }
+
+        .update-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0,255,136,0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .update-card:hover::before { left: 100%; }
+
+        .update-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0,255,136,0.35);
+            box-shadow: 0 15px 40px rgba(0,255,136,0.1);
+        }
+
+        .icon-box {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: rgba(124,58,237,0.15);
+            border: 1px solid rgba(124,58,237,0.25);
+            display: grid;
+            place-items: center;
+            font-size: 1.3rem;
+            margin-bottom: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .update-card:hover .icon-box {
+            background: rgba(0,255,136,0.15);
+            border-color: rgba(0,255,136,0.35);
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .update-card h3 {
+            font-size: 1.05rem;
+            margin-bottom: 7px;
+            transition: color 0.3s ease;
+        }
+
+        .update-card:hover h3 { color: var(--accent); }
+
+        .update-card p {
+            color: var(--muted);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            transition: color 0.3s ease;
+        }
+
+        .update-card:hover p { color: var(--text); }
+
+        .tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            background: rgba(0,255,136,0.1);
+            border: 0.5px solid rgba(0,255,136,0.3);
+            border-radius: 999px;
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        /* Comparison Section */
+        .comparison-section {
+            padding: 90px 5%;
+            text-align: center;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 50px auto 0;
+        }
+
+        .comparison-box {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 28px;
+            text-align: left;
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .comparison-box:nth-child(1) { animation-delay: 0.1s; }
+        .comparison-box:nth-child(2) { animation-delay: 0.25s; }
+        .comparison-box:nth-child(3) { animation-delay: 0.4s; }
+
+        .comparison-box:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0,255,136,0.4);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .comparison-box h3 {
+            font-size: 0.9rem;
+            color: var(--muted);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .comparison-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin: 10px 0;
+            font-size: 0.85rem;
+            color: var(--text);
+        }
+
+        .comparison-item i {
+            color: var(--accent);
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        /* Timeline Section */
+        .timeline-section {
+            padding: 90px 5%;
+            background: var(--bg-2);
+            border-top: 1px solid var(--border);
+        }
+
+        .timeline-container {
+            max-width: 900px;
+            margin: 50px auto 0;
+            position: relative;
+        }
+
+        .timeline-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .timeline-item {
+            text-align: center;
+            position: relative;
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.3s; }
+        .timeline-item:nth-child(4) { animation-delay: 0.4s; }
+
+        .timeline-number {
+            width: 50px;
+            height: 50px;
+            background: var(--card);
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin: 0 auto 14px;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover .timeline-number {
+            transform: scale(1.15);
+            box-shadow: 0 0 20px rgba(0,255,136,0.4);
+        }
+
+        .timeline-item h4 {
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+            color: var(--text);
+        }
+
+        .timeline-item p {
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 70px 5%;
+            text-align: center;
+        }
+
+        .cta-section p {
+            color: var(--muted);
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 22px 5%;
+            background: #05060a;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .header { padding: 12px 4%; }
+            
+            .hero {
+                padding: 50px 4% 40px;
+                min-height: 70vh;
+            }
+
+            .hero h1 { font-size: clamp(1.5rem, 4vw, 2.2rem); }
+            
+            .updates-container { padding: 60px 4%; }
+            .section-title { font-size: 1.5rem; margin-bottom: 30px; }
+            .updates-grid { grid-template-columns: 1fr; gap: 12px; }
+
+            .comparison-section { padding: 60px 4%; }
+            .comparison-grid { grid-template-columns: 1fr; gap: 12px; }
+
+            .timeline-section { padding: 60px 4%; }
+            .timeline-items { gap: 20px; }
+
+            .cta-section { padding: 50px 4%; }
+        }
+
+        @media (min-width: 641px) and (max-width: 1024px) {
+            .updates-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+            .comparison-grid { grid-template-columns: 1fr; gap: 14px; }
+            .timeline-items { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <a class="nox" href="index.html"><span class="nox-icon">N</span>NoxWebs</a>
+        <a class="cta-button" href="index.html">Back to Home</a>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <span class="bg-accent">1.1</span>
+        <div class="badge fade-in-up">
+            <span class="dot"></span> NoxWebs 1.1 Release
+        </div>
+        <h1 class="fade-in-up" style="animation-delay: 0.1s;">
+            A <span class="highlight">Smoother Experience</span>
+        </h1>
+        <p class="fade-in-up" style="animation-delay: 0.2s;">
+            We've rebuilt NoxWebs with enhanced animations, refined interactions, and a focus on creating a modern, 
+            polished experience. Every detail has been carefully crafted to feel premium and responsive.
+        </p>
+        <button class="cta-button fade-in-up" style="animation-delay: 0.3s;" onclick="document.querySelector('.updates-container').scrollIntoView({behavior: 'smooth'})">
+            See What's New
+        </button>
+    </section>
+
+    <!-- Updates Grid -->
+    <section class="updates-container">
+        <h2 class="section-title fade-in-up">Major Improvements</h2>
+        
+        <div class="updates-grid">
+            <!-- 1 -->
+            <div class="update-card">
+                <div class="icon-box">✨</div>
+                <h3>Enhanced Animations</h3>
+                <p>New smooth transitions and micro-interactions throughout the site. Every section has carefully orchestrated fade-in, slide, and scale animations that create a premium feel.</p>
+                <div class="tags">
+                    <span class="tag">Motion</span>
+                    <span class="tag">UX</span>
+                </div>
+            </div>
+
+            <!-- 2 -->
+            <div class="update-card">
+                <div class="icon-box">⚡</div>
+                <h3>Advanced Hover Effects</h3>
+                <p>Elevated micro-interactions with gradient overlays, icon rotations, and glowing effects. Cards respond intelligently to your cursor with subtle, delightful animations.</p>
+                <div class="tags">
+                    <span class="tag">Interactivity</span>
+                    <span class="tag">Polish</span>
+                </div>
+            </div>
+
+            <!-- 3 -->
+            <div class="update-card">
+                <div class="icon-box">📱</div>
+                <h3>Service Cards Redesign</h3>
+                <p>Service cards now feature emoji icons with colored backgrounds, better descriptions, and improved visual hierarchy. Each service is more distinct and visually engaging.</p>
+                <div class="tags">
+                    <span class="tag">Design</span>
+                    <span class="tag">Services</span>
+                </div>
+            </div>
+
+            <!-- 4 -->
+            <div class="update-card">
+                <div class="icon-box">🎯</div>
+                <h3>Active Navigation Indicator</h3>
+                <p>Dynamic navigation highlighting shows which section you're currently viewing. The underline smoothly animates as you scroll, keeping you oriented on the page.</p>
+                <div class="tags">
+                    <span class="tag">Navigation</span>
+                    <span class="tag">UX</span>
+                </div>
+            </div>
+
+            <!-- 5 -->
+            <div class="update-card">
+                <div class="icon-box">💰</div>
+                <h3>Pricing Enhancements</h3>
+                <p>Improved pricing cards with a "Most Popular" badge on the featured plan. Better visual hierarchy, detailed feature lists, and more compelling calls-to-action.</p>
+                <div class="tags">
+                    <span class="tag">Pricing</span>
+                    <span class="tag">Conversion</span>
+                </div>
+            </div>
+
+            <!-- 6 -->
+            <div class="update-card">
+                <div class="icon-box">📐</div>
+                <h3>Better Responsive Design</h3>
+                <p>Enhanced mobile-first approach with detailed media queries. From mobile phones to large screens, every breakpoint is optimized for a perfect viewing experience.</p>
+                <div class="tags">
+                    <span class="tag">Mobile</span>
+                    <span class="tag">Responsive</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section class="comparison-section">
+        <h2 class="section-title fade-in-up">What's Different</h2>
+        
+        <div class="comparison-grid">
+            <!-- Before -->
+            <div class="comparison-box">
+                <h3>Before 1.0</h3>
+                <div class="comparison-item">
+                    <i class="fa-solid fa-minus"></i>
+                    <span>Basic fade animations</span>
+                </div>
+                <div class="comparison-item">
+                    <i class="fa-solid fa-minus"></i>
+                    <span>Simple hover effects</span>
+                </div>
+                <div class="comparison-item">
+                    <i class="fa-solid fa-minus"></i>
+                    <span>Text-only service cards</span>
+                </div>
+                <div class="comparison-item">
+                    <i class="fa-solid fa-minus"></i>
+                    <span>No nav highlighting</span>
+                </div>
+                <div class="comparison-item">
+                    <i class="fa-solid fa-minus"></i>
+                    <span>Standard pricing layout</span>
+                </div>
+            </div>
+
+            <!-- Arrow/Star -->
+            <div class="comparison-box" style="background: transparent; border: none; display: flex; align-items: center; justify-content: center;">
+                <h3 style="position: absolute; top: 28px; font-size: 1.2rem;">✨</h3>
+                <span style="font-size: 3rem; color: var(--accent);">→</span>
+            </div>
+
+            <!-- After -->
+            <div class="comparison-box">
+                <h3>After 1.1</h3>
+                <div class="comparison-item">
+                    <i class="fa-solid fa-check"></i>
+                    <span>Rich, orchestrated animations</span>
+                </div>
+                <div class="comparison-item">
+                    <i class="fa-solid fa-check"></i>
+                    <span>Advanced interactive effects</span>
+                </div>
+                <div class="comparison-item">
+                    <i class="fa-solid fa-check"></i>
+                    <span>Emoji icons with styling</span>
+                </div>
+                <div class="comparison-item">
+                    <i class="fa-solid fa-check"></i>
+                    <span>Active section indicator</span>
+                </div>
+                <div class="comparison-item">
+                    <i class="fa-solid fa-check"></i>
+                    <span>Featured plan badge</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="timeline-section">
+        <h2 class="section-title fade-in-up">Development Journey</h2>
+        
+        <div class="timeline-container">
+            <div class="timeline-items">
+                <div class="timeline-item">
+                    <div class="timeline-number">1</div>
+                    <h4>Layout Foundation</h4>
+                    <p>Restructured HTML with improved semantic markup and better organization</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-number">2</div>
+                    <h4>Visual Polish</h4>
+                    <p>Enhanced color system, typography, and component styling</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-number">3</div>
+                    <h4>Animation Suite</h4>
+                    <p>Added comprehensive animation library with micro-interactions</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-number">4</div>
+                    <h4>Launch</h4>
+                    <p>Deployed NoxWebs 1.1 with full responsive support</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2 class="section-title fade-in-up">Ready to Experience It?</h2>
+        <p class="fade-in-up" style="animation-delay: 0.1s;">
+            Visit NoxWebs and explore the new, smoother experience. Every interaction has been refined.
+        </p>
+        <button class="cta-button fade-in-up" style="animation-delay: 0.2s;" onclick="window.location.href='index.html'">
+            Explore NoxWebs 1.1
+        </button>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        &copy; NoxWebs 2026. Crafted with attention to detail.
+    </footer>
+
+</body>
+</html>
